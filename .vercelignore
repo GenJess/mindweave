@@ -1,0 +1,28 @@
+# Flutter build artifacts
+.dart_tool/
+.packages
+build/
+!build/web/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Platform-specific
+android/
+ios/
+linux/
+macos/
+windows/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+architecture.md
+.prompt_attachments/
+
+# Test files
+test/

@@ -1,7 +1,7 @@
 {
-  "buildCommand": "flutter build web --release --base-href /",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "build/web",
-  "installCommand": "git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter && export PATH=\"$PATH:/tmp/flutter/bin\" && flutter config --no-analytics && flutter precache --web && flutter pub get",
+  "installCommand": "echo 'Dependencies will be installed in build script'",
   "framework": null,
   "rewrites": [
     {
