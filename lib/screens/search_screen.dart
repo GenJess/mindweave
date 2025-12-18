@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mindweave/services/notes_service.dart';
-import 'package:mindweave/services/ai_service.dart';
 import 'package:mindweave/models/note.dart';
 import 'package:mindweave/widgets/note_card.dart';
 import 'package:mindweave/screens/note_editor_screen.dart';
@@ -16,7 +15,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen>
     with TickerProviderStateMixin {
   final NotesService _notesService = NotesService();
-  final AIService _aiService = AIService();
   final TextEditingController _searchController = TextEditingController();
   
   List<Note> _searchResults = [];
@@ -82,17 +80,13 @@ class _SearchScreenState extends State<SearchScreen>
     try {
       List<Note> results;
       
-      // Use AI-powered universal search
+      // Use basic text search
       final allNotes = _notesService.notes;
-      final noteMaps = allNotes.map((note) => note.toMap()).toList();
-      final aiResults = await _aiService.universalSearch(query, noteMaps);
+      final lowerQuery = query.toLowerCase();
       
-      // Convert AI results back to notes
-      results = aiResults.map((result) {
-        return allNotes.firstWhere(
-          (note) => note.id == result.noteId,
-          orElse: () => allNotes.first,
-        );
+      results = allNotes.where((note) {
+        return note.title.toLowerCase().contains(lowerQuery) ||
+               note.content.toLowerCase().contains(lowerQuery);
       }).toList();
 
       setState(() {

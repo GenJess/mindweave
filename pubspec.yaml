@@ -29,7 +29,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
-  # Enable web rendering
-  web:
-    auto_detect: true

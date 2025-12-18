@@ -4,7 +4,6 @@ import 'package:mindweave/models/note.dart';
 import 'package:mindweave/models/copy_block.dart';
 import 'package:mindweave/services/notes_service.dart';
 import 'package:mindweave/services/folder_service.dart';
-import 'package:mindweave/services/ai_service.dart';
 import 'package:mindweave/widgets/copy_block_widget.dart';
 import 'package:mindweave/widgets/expandable_fab.dart';
 
@@ -23,7 +22,6 @@ class NoteEditorScreen extends StatefulWidget {
 class _NoteEditorScreenState extends State<NoteEditorScreen> {
   final NotesService _notesService = NotesService();
   final FolderService _folderService = FolderService();
-  final AIService _aiService = AIService();
   
   late TextEditingController _titleController;
   late TextEditingController _contentController;
@@ -562,7 +560,8 @@ Created with QuickNote''';
     );
 
     try {
-      final formattedContent = await _aiService.formatContent(_contentController.text);
+      // AI formatting temporarily disabled
+      final formattedContent = _contentController.text;
       
       setState(() {
         _contentController.text = formattedContent;
@@ -839,7 +838,6 @@ class _AIChatDialog extends StatefulWidget {
 
 class _AIChatDialogState extends State<_AIChatDialog> {
   final TextEditingController _questionController = TextEditingController();
-  final AIService _aiService = AIService();
   String? _aiResponse;
   bool _isLoading = false;
 
@@ -858,10 +856,9 @@ class _AIChatDialogState extends State<_AIChatDialog> {
     });
 
     try {
-      final response = await _aiService.chatAboutNote(
-        widget.noteContent,
-        _questionController.text,
-      );
+      // AI chat temporarily disabled
+      final response = "AI features are coming soon!"; 
+      // await _aiService.chatAboutNote(widget.noteContent, _questionController.text);
       
       setState(() {
         _aiResponse = response;
@@ -996,7 +993,6 @@ class _UploadThreadDialog extends StatefulWidget {
 
 class _UploadThreadDialogState extends State<_UploadThreadDialog> {
   final TextEditingController _threadController = TextEditingController();
-  final AIService _aiService = AIService();
   bool _isProcessing = false;
 
   @override
@@ -1011,7 +1007,8 @@ class _UploadThreadDialogState extends State<_UploadThreadDialog> {
     setState(() => _isProcessing = true);
     
     try {
-      final formattedThread = await _aiService.formatChatThread(_threadController.text);
+      // AI thread formatting temporarily disabled
+      final formattedThread = _threadController.text;
       
       widget.onProcessedThread(formattedThread);
       
